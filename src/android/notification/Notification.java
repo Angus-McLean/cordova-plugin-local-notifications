@@ -32,6 +32,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat.WearableExtender;
 import android.support.v4.app.RemoteInput;
 
 import org.json.JSONException;
@@ -175,20 +176,28 @@ public class Notification {
                 .setAction(options.getIdStr())
                 .putExtra(Options.EXTRA, options.toString());
 
-        PendingIntent pi = PendingIntent.getBroadcast(
-                context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pi;
 
 		try {
-			JSONArray voice = options.getJSONObject().getString("voice");
+			String voice = options.getDict().getJSONObject().getString("voice");
 			if(voice != null && !voice.equal("")) {
-				Intent intentA;
-				PendingIntent contentIntentA;
+				pi = PendingIntent.getBroadcast(
+		                context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+				RemoteInput remoteInput = new RemoteInput.Builder("extra_voice_reply")
+				.build();
+
+				NotificationCompat.Action action = new NotificationCompat.Action.Builder(options.getIconBitmap(),
+					options.getTitle(), contentIntentA)
+					.addRemoteInput(remoteInput)
+					.build();
+
 				WearableExtender wearableExtender = new WearableExtender();
-				NotificationCompat.Action.Builder actionBuilder = new Action.Builder(options.getIconBitmap(), options.getTitle(), contentIntentA);
-				RemoteInput.Builder remoteInputBuilder = new RemoteInput.Builder("voice_reply");
-				actionBuilder.addRemoteInput(remoteInputBuilder.build());
-				wearableExtender.addAction(actionBuilder.build());
+				wearableExtender.addAction(action);
 				this.extend(wearableExtender);
+			} else {
+				pi = PendingIntent.getBroadcast(
+		                context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 			}
 		} catch (Exception  e) {
 			e.printStackTrace();
