@@ -76,7 +76,7 @@ abstract public class AbstractRestoreReceiver extends BroadcastReceiver {
 				Log.d("AngusTest", "AbstractRestoreReceiver.java > onReceive > got voice input");
 				try {
 					data.put("voice_reply", voice_input_string);
-				} catch (JSONException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
