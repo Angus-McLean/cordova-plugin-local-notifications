@@ -188,7 +188,7 @@ public class Notification {
 				.build();
 
 				NotificationCompat.Action action = new NotificationCompat.Action.Builder(options.getIconBitmap(),
-					options.getTitle(), contentIntentA)
+					options.getTitle(), pi)
 					.addRemoteInput(remoteInput)
 					.build();
 
