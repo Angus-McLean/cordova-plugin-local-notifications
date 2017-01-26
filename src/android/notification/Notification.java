@@ -185,7 +185,7 @@ public class Notification {
 				PendingIntent contentIntentA;
 				WearableExtender wearableExtender = new WearableExtender();
 				NotificationCompat.Action.Builder actionBuilder = new Action.Builder(options.getIconBitmap(), options.getTitle(), contentIntentA);
-				RemoteInput.Builder remoteInputBuilder = new RemoteInput.Builder("voice_reply")
+				RemoteInput.Builder remoteInputBuilder = new RemoteInput.Builder("voice_reply");
 				actionBuilder.addRemoteInput(remoteInputBuilder.build());
 				wearableExtender.addAction(actionBuilder.build());
 				this.extend(wearableExtender);
