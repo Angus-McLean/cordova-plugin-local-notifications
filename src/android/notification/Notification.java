@@ -23,7 +23,7 @@
 
 package de.appplant.cordova.plugin.notification;
 
-import android.R.drawable;
+import android.R;
 
 import android.app.AlarmManager;
 import android.app.NotificationManager;
