@@ -177,12 +177,13 @@ public class Notification {
                 .setAction(options.getIdStr())
                 .putExtra(Options.EXTRA, options.toString());
 
-        PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        // PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pi;
 
 		try {
 			String voice = options.getDict().getString("voice");
 			if(voice != null && !voice.equals("")) {
-				PendingIntent pi = PendingIntent.getBroadcast(
+				pi = PendingIntent.getBroadcast(
 		                context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 				RemoteInput remoteInput = new RemoteInput.Builder("extra_voice_reply")
@@ -196,18 +197,19 @@ public class Notification {
 				builder.extend(new WearableExtender().addAction(action));
 
 			} else {
-				PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+				pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+			}
+
+			if (isRepeating()) {
+				getAlarmMgr().setRepeating(AlarmManager.RTC_WAKEUP,
+				triggerTime, options.getRepeatInterval(), pi);
+			} else {
+				getAlarmMgr().set(AlarmManager.RTC_WAKEUP, triggerTime, pi);
 			}
 		} catch (Exception  e) {
 			e.printStackTrace();
 		}
 
-		if (isRepeating()) {
-			getAlarmMgr().setRepeating(AlarmManager.RTC_WAKEUP,
-			triggerTime, options.getRepeatInterval(), pi);
-		} else {
-			getAlarmMgr().set(AlarmManager.RTC_WAKEUP, triggerTime, pi);
-		}
 
     }
 
