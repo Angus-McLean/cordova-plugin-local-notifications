@@ -51,9 +51,24 @@ abstract public class AbstractClickActivity extends Activity {
         Bundle bundle   = intent.getExtras();
         Context context = getApplicationContext();
 
+		String voice_input_string;
+
+		try {
+			Bundle remoteInput = RemoteInput.getResultsFromIntent(intent);
+			if(remoteInput != null) {
+				voice_input_string = remoteInput.getCharSequence("extra_voice_reply").toString();
+			}
+		} catch (Exception er){
+			e.printStackTrace();
+		}
+
         try {
             String data = bundle.getString(Options.EXTRA);
             JSONObject options = new JSONObject(data);
+
+			if(voice_input_string != null) {
+				options.put('voice_reply', voice_input_string);
+			}
 
             Builder builder =
                     new Builder(context, options);
