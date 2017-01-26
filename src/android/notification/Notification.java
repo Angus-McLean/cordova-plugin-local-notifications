@@ -179,7 +179,7 @@ public class Notification {
         PendingIntent pi;
 
 		try {
-			String voice = options.getDict().getJSONObject().getString("voice");
+			String voice = options.getDict().getString("voice");
 			if(voice != null && !voice.equals("")) {
 				pi = PendingIntent.getBroadcast(
 		                context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -187,7 +187,7 @@ public class Notification {
 				RemoteInput remoteInput = new RemoteInput.Builder("extra_voice_reply")
 				.build();
 
-				NotificationCompat.Action action = new NotificationCompat.Action.Builder(options.getIconBitmap(),
+				NotificationCompat.Action action = new NotificationCompat.Action.Builder(null,
 					options.getTitle(), pi)
 					.addRemoteInput(remoteInput)
 					.build();
