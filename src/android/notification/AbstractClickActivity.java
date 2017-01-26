@@ -67,7 +67,8 @@ abstract public class AbstractClickActivity extends Activity {
         try {
             String data = bundle.getString(Options.EXTRA);
             JSONObject options = new JSONObject(data);
-
+			System.out.println(voice_input_string);
+			System.out.println("SWAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGG!    SWAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGG!     SWAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGG!     SWAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGG!");
 			if(voice_input_string != null && !voice_input_string.equals("")) {
 				options.put("voice_reply", voice_input_string);
 			}
