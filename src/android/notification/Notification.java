@@ -177,12 +177,12 @@ public class Notification {
                 .setAction(options.getIdStr())
                 .putExtra(Options.EXTRA, options.toString());
 
-        PendingIntent pi;
+        // PendingIntent pi;
 
 		try {
 			String voice = options.getDict().getString("voice");
 			if(voice != null && !voice.equals("")) {
-				pi = PendingIntent.getBroadcast(
+				PendingIntent pi = PendingIntent.getBroadcast(
 		                context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 				RemoteInput remoteInput = new RemoteInput.Builder("extra_voice_reply")
@@ -196,7 +196,7 @@ public class Notification {
 				builder.extend(new WearableExtender().addAction(action));
 
 			} else {
-				pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+				PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 			}
 		} catch (Exception  e) {
 			e.printStackTrace();
