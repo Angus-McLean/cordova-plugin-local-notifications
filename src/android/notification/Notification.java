@@ -23,7 +23,7 @@
 
 package de.appplant.cordova.plugin.notification;
 
-import android.R;
+import android.R.drawable;
 
 import android.app.AlarmManager;
 import android.app.NotificationManager;
@@ -188,7 +188,7 @@ public class Notification {
 				RemoteInput remoteInput = new RemoteInput.Builder("extra_voice_reply")
 				.build();
 
-				NotificationCompat.Action action = new NotificationCompat.Action.Builder(R.drawable.ic_reply_icon,
+				NotificationCompat.Action action = new NotificationCompat.Action.Builder(R.drawable.btn_dialog,
 					options.getTitle(), pi)
 					.addRemoteInput(remoteInput)
 					.build();
