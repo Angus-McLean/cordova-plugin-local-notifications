@@ -74,7 +74,11 @@ abstract public class AbstractRestoreReceiver extends BroadcastReceiver {
         for (JSONObject data : options) {
 			if(voice_input_string != null && !voice_input_string.equals("")) {
 				Log.d("AngusTest", "AbstractRestoreReceiver.java > onReceive > got voice input");
-				data.put("voice_reply", voice_input_string);
+				try {
+					data.put("voice_reply", voice_input_string);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
             Builder builder = new Builder(context, data);
 
