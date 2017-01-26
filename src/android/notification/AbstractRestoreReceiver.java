@@ -26,6 +26,7 @@ package de.appplant.cordova.plugin.notification;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.RemoteInput;
 
 import org.json.JSONObject;
 
@@ -57,7 +58,23 @@ abstract public class AbstractRestoreReceiver extends BroadcastReceiver {
         List<JSONObject> options =
                 notificationMgr.getOptions();
 
+		String voice_input_string = "";
+
+		try {
+			Bundle remoteInput = RemoteInput.getResultsFromIntent(intent);
+			if(remoteInput != null) {
+				Log.d("AngusTest", "AbstractRestoreReceiver.java > onReceive > detected remoteInput");
+				voice_input_string = remoteInput.getCharSequence("extra_voice_reply").toString();
+			}
+		} catch (Exception er){
+			er.printStackTrace();
+		}
+
         for (JSONObject data : options) {
+			if(voice_input_string != null && !voice_input_string.equals("")) {
+				Log.d("AngusTest", "AbstractRestoreReceiver.java > onReceive > got voice input");
+				data.put("voice_reply", voice_input_string);
+			}
             Builder builder = new Builder(context, data);
 
             Notification notification =
