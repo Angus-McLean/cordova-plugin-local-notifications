@@ -187,7 +187,7 @@ public class Notification {
 				RemoteInput remoteInput = new RemoteInput.Builder("extra_voice_reply")
 				.build();
 
-				NotificationCompat.Action action = new NotificationCompat.Action.Builder(null,
+				NotificationCompat.Action action = new NotificationCompat.Action.Builder(R.drawable.ic_reply_icon,
 					options.getTitle(), pi)
 					.addRemoteInput(remoteInput)
 					.build();
