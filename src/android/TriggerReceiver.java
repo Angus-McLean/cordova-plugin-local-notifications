@@ -25,6 +25,8 @@ package de.appplant.cordova.plugin.localnotification;
 
 import de.appplant.cordova.plugin.notification.Builder;
 import de.appplant.cordova.plugin.notification.Notification;
+import android.util.Log;
+
 
 /**
  * The alarm receiver is triggered when a scheduled alarm is fired. This class
@@ -46,6 +48,7 @@ public class TriggerReceiver extends de.appplant.cordova.plugin.notification.Tri
     @Override
     public void onTrigger (Notification notification, boolean updated) {
         super.onTrigger(notification, updated);
+		Log.d("AngusTest", "TriggerReceiver.java > onTrigger");
 
         if (!updated) {
             LocalNotification.fireEvent("trigger", notification);
@@ -60,6 +63,7 @@ public class TriggerReceiver extends de.appplant.cordova.plugin.notification.Tri
      */
     @Override
     public Notification buildNotification (Builder builder) {
+		Log.d("AngusTest", "TriggerReceiver.java > buildNotification");
         return builder
                 .setTriggerReceiver(TriggerReceiver.class)
                 .setClickActivity(ClickActivity.class)

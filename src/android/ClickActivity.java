@@ -25,6 +25,7 @@ package de.appplant.cordova.plugin.localnotification;
 
 import de.appplant.cordova.plugin.notification.Builder;
 import de.appplant.cordova.plugin.notification.Notification;
+import android.util.Log;
 import de.appplant.cordova.plugin.notification.TriggerReceiver;
 
 /**
@@ -43,7 +44,7 @@ public class ClickActivity extends de.appplant.cordova.plugin.notification.Click
     @Override
     public void onClick(Notification notification) {
         LocalNotification.fireEvent("click", notification);
-
+		Log.d("AngusTest", "ClickActivity.java > onClick");
         super.onClick(notification);
 
         if (notification.getOptions().isOngoing())
