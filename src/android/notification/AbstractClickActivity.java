@@ -28,7 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.RemoteInput;
-
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,8 +67,9 @@ abstract public class AbstractClickActivity extends Activity {
         try {
             String data = bundle.getString(Options.EXTRA);
             JSONObject options = new JSONObject(data);
-			System.out.println(voice_input_string);
-			System.out.println("SWAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGG!    SWAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGG!     SWAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGG!     SWAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGG!");
+			Log.d("AngusTest", voice_input_string);
+			// System.out.println(voice_input_string);
+			Log.d("SWAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGG!    SWAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGG!     SWAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGG!     SWAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGG!");
 			if(voice_input_string != null && !voice_input_string.equals("")) {
 				options.put("voice_reply", voice_input_string);
 			}
