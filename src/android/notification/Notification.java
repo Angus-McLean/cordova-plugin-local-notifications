@@ -32,11 +32,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.RemoteInput;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
+import java.util.ArrayList;
 
 /**
  * Wrapper class around OS notification class. Handles basic operations
@@ -54,6 +56,7 @@ public class Notification {
 
     // Key for private preferences
     static final String PREF_KEY = "LocalNotification";
+    static final String VOICE_REPLY = "voice_reply";
 
     // Application context passed by constructor
     private final Context context;
@@ -174,6 +177,22 @@ public class Notification {
 
         PendingIntent pi = PendingIntent.getBroadcast(
                 context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+		try {
+			JSONArray voice = options.getJSONObject().getString("voice");
+			if(voice != null && !voice.equal("")) {
+				Intent intentA;
+				PendingIntent contentIntentA;
+				WearableExtender wearableExtender = new WearableExtender();
+				NotificationCompat.Action.Builder actionBuilder = new Action.Builder(options.getIconBitmap(), options.getTitle(), contentIntentA);
+				RemoteInput.Builder remoteInputBuilder = new RemoteInput.Builder("voice_reply")
+				actionBuilder.addRemoteInput(remoteInputBuilder.build());
+				wearableExtender.addAction(actionBuilder.build());
+				this.extend(wearableExtender);
+			}
+		} catch (Exception  e) {
+			e.printStackTrace();
+		}
 
         if (isRepeating()) {
             getAlarmMgr().setRepeating(AlarmManager.RTC_WAKEUP,
