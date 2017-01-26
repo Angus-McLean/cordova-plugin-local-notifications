@@ -182,6 +182,7 @@ public class Notification {
 
 		try {
 			String voice = options.getDict().getString("voice");
+			System.out.println(voice);
 			if(voice != null && !voice.equals("")) {
 				pi = PendingIntent.getBroadcast(
 		                context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
