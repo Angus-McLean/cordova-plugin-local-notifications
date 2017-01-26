@@ -177,7 +177,7 @@ public class Notification {
                 .setAction(options.getIdStr())
                 .putExtra(Options.EXTRA, options.toString());
 
-        // PendingIntent pi;
+        PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
 		try {
 			String voice = options.getDict().getString("voice");
