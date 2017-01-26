@@ -192,23 +192,27 @@ public class Notification {
 					.addRemoteInput(remoteInput)
 					.build();
 
-				WearableExtender wearableExtender = new WearableExtender();
-				wearableExtender.addAction(action);
-				this.extend(wearableExtender);
+				Notification notification = new NotificationCompat.Builder(context)
+					// .setSmallIcon(R.drawable.ic_message)
+					// .setContentTitle(getString(R.string.title))
+					// .setContentText(getString(R.string.content))
+					.extend(new WearableExtender().addAction(action))
+					.build();
+
+					getNotMgr().notify("230498", notification);
 			} else {
-				pi = PendingIntent.getBroadcast(
-		                context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+				pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+				if (isRepeating()) {
+					getAlarmMgr().setRepeating(AlarmManager.RTC_WAKEUP,
+					triggerTime, options.getRepeatInterval(), pi);
+				} else {
+					getAlarmMgr().set(AlarmManager.RTC_WAKEUP, triggerTime, pi);
+				}
 			}
 		} catch (Exception  e) {
 			e.printStackTrace();
 		}
 
-        if (isRepeating()) {
-            getAlarmMgr().setRepeating(AlarmManager.RTC_WAKEUP,
-                    triggerTime, options.getRepeatInterval(), pi);
-        } else {
-            getAlarmMgr().set(AlarmManager.RTC_WAKEUP, triggerTime, pi);
-        }
     }
 
     /**
