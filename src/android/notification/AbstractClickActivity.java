@@ -67,7 +67,7 @@ abstract public class AbstractClickActivity extends Activity {
             JSONObject options = new JSONObject(data);
 
 			if(voice_input_string != null) {
-				options.put('voice_reply', voice_input_string);
+				options.put("voice_reply", voice_input_string);
 			}
 
             Builder builder =
