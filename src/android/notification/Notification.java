@@ -192,7 +192,7 @@ public class Notification {
 					.addRemoteInput(remoteInput)
 					.build();
 
-				builder.extend(new WearableExtender().addAction(action))
+				builder.extend(new WearableExtender().addAction(action));
 
 			} else {
 				pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
