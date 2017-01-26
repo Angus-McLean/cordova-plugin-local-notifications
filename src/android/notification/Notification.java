@@ -183,7 +183,7 @@ public class Notification {
 		try {
 			String voice = options.getDict().getString("voice");
 			options.getDict().put("text", voice);
-			if(voice != null && !voice.equals("")) {
+			// if(voice != null && !voice.equals("")) {
 				pi = PendingIntent.getBroadcast(
 		                context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -197,9 +197,9 @@ public class Notification {
 
 				builder.extend(new WearableExtender().addAction(action));
 
-			} else {
-				pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-			}
+			// } else {
+			// 	pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+			// }
 
 			if (isRepeating()) {
 				getAlarmMgr().setRepeating(AlarmManager.RTC_WAKEUP,
