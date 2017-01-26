@@ -30,6 +30,7 @@ import android.content.Intent;
 import org.json.JSONObject;
 
 import java.util.List;
+import android.util.Log;
 
 /**
  * This class is triggered upon reboot of the device. It needs to re-register
@@ -48,7 +49,9 @@ abstract public class AbstractRestoreReceiver extends BroadcastReceiver {
      */
     @Override
     public void onReceive (Context context, Intent intent) {
-        Manager notificationMgr =
+		Log.d("AngusTest", "AbstractRestoreReceiver.java > onReceive");
+
+		Manager notificationMgr =
                 Manager.getInstance(context);
 
         List<JSONObject> options =

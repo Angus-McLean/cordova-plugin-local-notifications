@@ -32,6 +32,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
+import android.util.Log;
+
 
 /**
  * Abstract broadcast receiver for local notifications. Creates the
@@ -49,6 +51,8 @@ abstract public class AbstractTriggerReceiver extends BroadcastReceiver {
      */
     @Override
     public void onReceive(Context context, Intent intent) {
+		Log.d("AngusTest", "AbstractTriggerReceiver.java > onReceive");
+
         Bundle bundle  = intent.getExtras();
         Options options;
 
