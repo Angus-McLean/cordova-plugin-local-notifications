@@ -59,7 +59,7 @@ abstract public class AbstractClickActivity extends Activity {
 				voice_input_string = remoteInput.getCharSequence("extra_voice_reply").toString();
 			}
 		} catch (Exception er){
-			e.printStackTrace();
+			er.printStackTrace();
 		}
 
         try {
