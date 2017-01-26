@@ -198,7 +198,7 @@ public class Notification {
 				builder.extend(new WearableExtender().addAction(action));
 
 				NotificationCompat.Notification notification = builder.build();
-				getNotMgr().notify(1, notification)
+				getNotMgr().notify(1, notification);
 
 			} else {
 				pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
